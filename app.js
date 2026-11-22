@@ -184,7 +184,7 @@ Router.on('/roulette', root => {
       const t = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - t, 4);
       angle = start + total * e;
       const s = Math.floor((((-angle) % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2) / seg);
-      if (s !== lastSeg) { lastSeg = s; vibrate(5); }
+      if (s !== lastSeg) { lastSeg = s; vibrate(5); Sfx.play('tick'); }
       draw();
       if (t < 1) raf = requestAnimationFrame(tick);
       else { spinning = false; show(slots[target]); }
@@ -192,7 +192,7 @@ Router.on('/roulette', root => {
     raf = requestAnimationFrame(tick);
   }
   function show(p) {
-    vibrate([40, 30, 80]);
+    vibrate([40, 30, 80]); Sfx.play('win');
     const w = $('#win');
     w.innerHTML = `<div class="muted small">오늘은 여기!</div><div class="wn">${esc(p.name)}</div><div class="muted">${catName(p.cat)} · ${p.dist}m</div>
       <div class="row" style="justify-content:center;margin-top:10px">${p.id.startsWith('demo') ? '' : `<a class="btn primary" href="${mapLink(p)}" target="_blank" rel="noopener noreferrer">지도에서 보기</a>`}<button class="btn" id="again">한 번 더</button><button class="btn" id="share">단톡에 보내기</button></div>`;
