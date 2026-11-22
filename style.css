@@ -26,3 +26,34 @@
 .pc .list { max-height: 70vh; }
 .pc .wheel-wrap { width: min(100%, 520px); }
 .pc .rl { text-align: center; }
+
+/* ---------- S6: 2단계 룰렛·고정·제외·같이 고르기 ---------- */
+.feats { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-top: 14px; }
+.feats span { font-size: 12px; background: var(--accent-soft); color: #8a3a12; border-radius: 999px; padding: 4px 10px; }
+.addf { flex-wrap: nowrap; }
+.addf input { flex: 1; min-width: 0; }
+.addf select { flex: none; width: auto; max-width: 38%; }
+.place .pl { display: flex; align-items: center; gap: 10px; cursor: pointer; min-width: 0; }
+.place b { word-break: keep-all; }
+.ib { flex: none; width: 36px; height: 36px; border: 1px solid transparent; border-radius: 10px; background: transparent; font-size: 17px; cursor: pointer; opacity: .35; filter: grayscale(1); }
+.ib:hover, .ib:focus-visible { opacity: .9; filter: none; border-color: var(--line); }
+.ib.pin.on { opacity: 1; filter: none; background: var(--accent-soft); }
+.place.pinned b::before { content: '📌 '; }
+.tag { display: inline-block; font-size: 11px; padding: 1px 6px; border-radius: 6px; background: var(--accent-soft); color: #8a3a12; }
+.empty { text-align: center; padding: 18px 6px; }
+.em { font-size: 44px; margin-bottom: 6px; }
+.banned summary { cursor: pointer; font-weight: 700; }
+.banned .bn { padding: 6px 0; border-bottom: 1px solid var(--line); }
+.banned .bn:last-child { border-bottom: none; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 3px; background: var(--card); gap: 2px; max-width: 100%; }
+.seg button { border: none; background: transparent; border-radius: 999px; padding: 8px 14px; font: inherit; font-weight: 700; color: var(--muted); cursor: pointer; white-space: nowrap; }
+.seg button.on { background: var(--accent); color: #fff; }
+.seg button:focus-visible { box-shadow: 0 0 0 4px var(--accent-soft); outline: none; }
+.stage { min-height: 20px; margin-bottom: 18px !important; }
+.opt { justify-content: center; gap: 6px; cursor: pointer; }
+.opt input { width: 18px; height: 18px; accent-color: var(--accent); }
+.recent .rs { text-decoration: line-through; }
+.veto { flex: none; min-height: 36px; padding: 6px 12px; }
+.veto.on { background: #ffe3e3; border-color: #ff8787; }
+.big-n { font-size: 40px; font-weight: 900; color: var(--accent); }
+@media (max-width: 420px) { .seg button { padding: 8px 10px; font-size: 13px; } }
