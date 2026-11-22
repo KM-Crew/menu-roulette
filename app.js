@@ -149,7 +149,7 @@ Router.on('/roulette', root => {
       <div class="pc-only muted">가운데 버튼을 눌러 돌려 보세요</div>
       <div id="win" class="win hidden"></div>
       <div class="row"><button class="btn grow" id="shuffle">${pool.length > 12 ? '후보 다시 뽑기' : '섞기'}</button><a class="btn grow" href="#/nearby">후보 고치기</a></div>
-      <p class="muted small">후보가 12곳보다 많으면 무작위로 12곳만 올려요</p>
+      <p class="muted small">Space 또는 Enter로도 돌릴 수 있어요 · 후보가 12곳보다 많으면 무작위로 12곳만 올려요</p>
       </div>
     </section>`));
   const cv = $('#w'), c2 = cv.getContext('2d');
@@ -201,9 +201,14 @@ Router.on('/roulette', root => {
     $('#share').onclick = () => shareText('그래서 우리 뭐 먹음?', `룰렛 결과: 오늘은 "${p.name}" (${catName(p.cat)}, ${p.dist}m) 이의 없음?`, location.href.split('#')[0]);
   }
   $('#spin').onclick = spin;
+  const onKey = e => {
+    if ((e.key !== ' ' && e.key !== 'Enter') || /^(INPUT|TEXTAREA|SELECT|BUTTON|A)$/.test(e.target.tagName)) return;
+    e.preventDefault(); spin();
+  };
+  addEventListener('keydown', onKey);
   $('#shuffle').onclick = () => { if (spinning) return; slots = pickSlots(); if (pool.length <= 12) slots.sort(() => Math.random() - .5); draw(); };
   draw();
-  return () => cancelAnimationFrame(raf);
+  return () => { cancelAnimationFrame(raf); removeEventListener('keydown', onKey); };
 });
 
 Router.start($('#app'));
