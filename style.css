@@ -18,3 +18,11 @@
 .win { background: var(--card); border: 2px solid var(--accent); border-radius: 18px; padding: 16px; animation: pop .4s ease; }
 .wn { font-size: 28px; font-weight: 900; letter-spacing: -.02em; }
 @keyframes pop { from { transform: scale(.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+/* ---------- PC 화면 ---------- */
+.pc-only { display: none; }
+.pc .pc-only { display: block; }
+.pc body[data-page=home] main { max-width: 640px; }
+.pc .list { max-height: 70vh; }
+.pc .wheel-wrap { width: min(100%, 520px); }
+.pc .rl { text-align: center; }

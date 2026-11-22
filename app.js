@@ -102,9 +102,12 @@ Router.on('/nearby', root => {
       <div class="row"><h2 style="margin:0">📍 ${esc(st.label || '내 주변')}</h2><span class="grow"></span><a class="small muted" href="#/">위치 바꾸기</a></div>
       ${st.demo ? '<div class="notice">예시 가게예요. 진짜 주변 가게로 하려면 위치를 허용하거나 지역을 검색하세요.</div>' : `
       <div class="row" id="rad">${[300, 500, 1000].map(r => `<button class="chip ${st.radius === r ? 'on' : ''}" data-r="${r}">${r < 1000 ? r + 'm' : '1km'}</button>`).join('')}</div>`}
+      <div class="split s37"><div class="stack sticky">
       <div class="row cats" id="cats">${CATS.map(c => `<button class="chip ${st.cat === c.id ? 'on' : ''}" data-c="${c.id}">${c.name}</button>`).join('')}</div>
-      <div class="card list" id="list"></div>
       <a class="btn primary big block" id="go" href="#/roulette">룰렛 돌리러 가기</a>
+      </div>
+      <div class="card list" id="list"></div>
+      </div>
       ${st.demo ? '' : '<p class="muted small center">가게 정보 © OpenStreetMap 기여자 · 실제 영업 여부와 다를 수 있어요</p>'}
     </section>`));
   function render() {
@@ -140,11 +143,14 @@ Router.on('/roulette', root => {
   const pickSlots = () => pool.length > 12 ? pool.slice().sort(() => Math.random() - .5).slice(0, 12) : pool.slice();
   let slots = pickSlots();
   root.append(h(`
-    <section class="stack center">
+    <section class="split center rl">
       <div class="wheel-wrap"><div class="pointer"></div><canvas id="w" width="640" height="640"></canvas><button class="spin" id="spin">돌려!</button></div>
+      <div class="stack center">
+      <div class="pc-only muted">가운데 버튼을 눌러 돌려 보세요</div>
       <div id="win" class="win hidden"></div>
       <div class="row"><button class="btn grow" id="shuffle">${pool.length > 12 ? '후보 다시 뽑기' : '섞기'}</button><a class="btn grow" href="#/nearby">후보 고치기</a></div>
       <p class="muted small">후보가 12곳보다 많으면 무작위로 12곳만 올려요</p>
+      </div>
     </section>`));
   const cv = $('#w'), c2 = cv.getContext('2d');
   let angle = 0, spinning = false, raf = 0;
